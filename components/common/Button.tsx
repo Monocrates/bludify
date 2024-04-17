@@ -49,7 +49,7 @@ const ButtonLabel = styled.span`
 
 const ButtonIcon = styled.span`
   margin: 0;
-`
+`;
 
 const Button = ({ buttonType, children, ...props }: ButtonProps) => {
   console.log('render button component');
