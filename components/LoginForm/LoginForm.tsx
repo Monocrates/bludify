@@ -3,11 +3,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormField, Label } from '@radix-ui/react-form';
 import { Box, Flex, TextField } from '@radix-ui/themes';
-import React from 'react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
-import Button from '../common/Button';
 import styled from 'styled-components';
+import { z } from 'zod';
+
+import Button from '../common/Button';
+import { createUser } from '@/lib/actions';
 
 const StyledForm = styled(Form)`
   width: 100%;
@@ -31,14 +33,29 @@ const schema = z.object({
 type LoginFormFields = z.infer<typeof schema>;
 
 const LoginForm = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormFields>({ resolver: zodResolver(schema) });
 
-  const onSubmit: SubmitHandler<LoginFormFields> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<LoginFormFields> = async (data, event) => {
+    event?.preventDefault();
+
+    const { email, password } = data;
+
+    if (isLogin) {
+      // Logged user
+    } else {
+      try {
+        const result = await createUser(email, password);
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
