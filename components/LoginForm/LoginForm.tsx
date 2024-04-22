@@ -1,29 +1,15 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormField, Label } from '@radix-ui/react-form';
-import { Box, Flex, TextField } from '@radix-ui/themes';
+import { Label } from '@radix-ui/react-form';
+import { Box, Flex } from '@radix-ui/themes';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import styled from 'styled-components';
 import { z } from 'zod';
 
-import Button from '../common/Button';
 import { createUser } from '@/lib/actions';
-
-const StyledForm = styled(Form)`
-  width: 100%;
-  margin: 0 auto;
-  padding-bottom: 0;
-
-  @media (min-width: 767px) {
-    width: 324px;
-  }
-`;
-
-const StyleFormField = styled(FormField)`
-  padding-bottom: 1rem;
-`;
+import Button from '../common/Button';
+import { ErrorIcon, ErrorMessage, StyleFormField, StyleTextField, StyledError, StyledForm } from './styles/FormStyles';
 
 const schema = z.object({
   email: z.string().email().min(1, 'Enter a valid email'),
@@ -62,17 +48,27 @@ const LoginForm = () => {
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <StyleFormField name="email">
         <Flex pb="2">
-          <Label>Email</Label>
+          <Label htmlFor="email-input">Email</Label>
         </Flex>
-        <TextField.Root type="email" {...register('email')} />
-        {errors.email && <div>{errors.email.message}</div>}
+        <StyleTextField type="email" id="email-input" $error={!!errors.email} {...register('email')} />
+        {errors.email && (
+          <StyledError>
+            <ErrorIcon style={{ marginInlineEnd: '4px' }} />
+            <ErrorMessage>{errors.email.message}</ErrorMessage>
+          </StyledError>
+        )}
       </StyleFormField>
       <StyleFormField name="password">
         <Flex pb="2">
-          <Label>Password</Label>
+          <Label htmlFor="password-input">Password</Label>
         </Flex>
-        <TextField.Root type="password" {...register('password')} />
-        {errors.password && <div>{errors.password.message}</div>}
+        <StyleTextField type="password" id="password-input" $error={!!errors.password} {...register('password')} />
+        {errors.password && (
+          <StyledError>
+            <ErrorIcon style={{ marginInlineEnd: '4px' }} />
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          </StyledError>
+        )}
       </StyleFormField>
       <Box py="5">
         <Button buttonType="secondary" type="submit">
