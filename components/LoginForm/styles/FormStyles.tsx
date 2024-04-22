@@ -1,4 +1,4 @@
-import { Form, FormField } from '@radix-ui/react-form';
+import { Form, FormField, Label } from '@radix-ui/react-form';
 import { TextField } from '@radix-ui/themes';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import styled from 'styled-components';
@@ -15,6 +15,11 @@ export const StyledForm = styled(Form)`
 
 export const StyleFormField = styled(FormField)`
   padding-bottom: 1rem;
+`;
+
+export const StyleLabel = styled(Label)`
+  font-weight: bold;
+  font-size: 0.825rem;
 `;
 
 export const StyleTextField = styled(TextField.Root)<{ $error?: boolean }>`

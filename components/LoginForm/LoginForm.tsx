@@ -1,15 +1,22 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Label } from '@radix-ui/react-form';
-import { Box, Flex } from '@radix-ui/themes';
+import { Box, Flex, Switch, Text } from '@radix-ui/themes';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { createUser } from '@/lib/actions';
 import Button from '../common/Button';
-import { ErrorIcon, ErrorMessage, StyleFormField, StyleTextField, StyledError, StyledForm } from './styles/FormStyles';
+import {
+  ErrorIcon,
+  ErrorMessage,
+  StyleFormField,
+  StyleLabel,
+  StyleTextField,
+  StyledError,
+  StyledForm,
+} from './styles/FormStyles';
 
 const schema = z.object({
   email: z.string().email().min(1, 'Enter a valid email'),
@@ -48,7 +55,7 @@ const LoginForm = () => {
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <StyleFormField name="email">
         <Flex pb="2">
-          <Label htmlFor="email-input">Email</Label>
+          <StyleLabel htmlFor="email-input">Email</StyleLabel>
         </Flex>
         <StyleTextField type="email" id="email-input" $error={!!errors.email} {...register('email')} />
         {errors.email && (
@@ -60,7 +67,7 @@ const LoginForm = () => {
       </StyleFormField>
       <StyleFormField name="password">
         <Flex pb="2">
-          <Label htmlFor="password-input">Password</Label>
+          <StyleLabel htmlFor="password-input">Password</StyleLabel>
         </Flex>
         <StyleTextField type="password" id="password-input" $error={!!errors.password} {...register('password')} />
         {errors.password && (
@@ -70,6 +77,13 @@ const LoginForm = () => {
           </StyledError>
         )}
       </StyleFormField>
+
+      <Flex gap="2" align="center" mt="2">
+        <Switch size="1" color="green" />
+        <Text as="label" size="1">
+          Remember me
+        </Text>
+      </Flex>
       <Box py="5">
         <Button buttonType="secondary" type="submit">
           <Button.Label>{isSubmitting ? 'Logging...' : 'Log In'}</Button.Label>
