@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { createUser } from '@/lib/actions';
-import Button from '../common/Button';
+import Button from '../../common/Button';
 import {
   ErrorIcon,
   ErrorMessage,
@@ -16,7 +16,7 @@ import {
   StyleTextField,
   StyledError,
   StyledForm,
-} from './styles/FormStyles';
+} from '../../common/styles/FormStyles';
 
 const schema = z.object({
   email: z.string().email().min(1, 'Enter a valid email'),

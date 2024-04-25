@@ -1,9 +1,9 @@
 import React from 'react';
 
-import LoginUser from '@/components/LoginUser/LoginUser';
+import LoginUser from '@/components/Login/LoginUser/LoginUser';
 import { Box, Flex, Separator } from '@radix-ui/themes';
-import LoginSocialMedia from '@/components/LoginSocialMedia/LoginSocialMedia';
-import LoginForm from '@/components/LoginForm/LoginForm';
+import LoginSocialMedia from '@/components/Login/LoginSocialMedia/LoginSocialMedia';
+import LoginForm from '@/components/Login/LoginForm/LoginForm';
 
 const Login = () => {
   return (

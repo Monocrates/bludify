@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaSpotify } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 const StyledHeader = styled.header`
   display: flex;
@@ -10,6 +11,7 @@ const StyledHeader = styled.header`
   padding: 2rem;
   background-color: #121212;
   font-size: 2rem;
+  cursor: pointer;
 
   & span {
     font-size: 1.2rem;
@@ -18,8 +20,10 @@ const StyledHeader = styled.header`
 `;
 
 const Header = () => {
+  const router = useRouter();
+
   return (
-    <StyledHeader>
+    <StyledHeader onClick={() => router.push('/')}>
       <FaSpotify /> <span>Bludify</span>
     </StyledHeader>
   );

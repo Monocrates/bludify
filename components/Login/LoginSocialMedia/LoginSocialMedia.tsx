@@ -3,7 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
-import Button from '../common/Button';
+import Button from '../../common/Button';
 
 const ButtonsContainer = styled.div`
   display: flex;
